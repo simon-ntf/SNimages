@@ -1,0 +1,8 @@
+#SET{id_snimage,new}
+<BOUCLE_snimages(SNIMAGES){tout}{id_document}{snv_format=#ENV{snimage_format}}{snv_def=#ENV{snimage_def}}>
+	#SET{id_snimage,#ID_SNIMAGE}
+</BOUCLE_snimages>
+<div class="ajax">
+    #FORMULAIRE_JOINDRE_SNIMAGE{#ENV{snimage_format},#ENV{snimage_def},#ENV{id_document},#GET{id_snimage}}
+</div>
+<!-- SN Images - prive/squelettes/inclure/doc-joindre-snimage -->

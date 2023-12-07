@@ -1,0 +1,6 @@
+<div class="editer editer_id_document[ (#ENV**{erreurs}|table_valeur{id_document}|oui)erreur]">
+<label for="id_document"><:snimage:snimage_label_doc_ref:></label>[
+<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_document})</span>
+]<div class="ajax">#INCLUDE{fond=prive/inclure/saisies/selecteur_snimage,nom=id_document,size=6,maxlength=21,defaut=#ENV**{id_document},imgapi=#ENV{imgapi},selimg=#ENV{selimg}}</div>
+</div>
+<!-- SN Images - prive/inclure/editer/champ_id_document -->

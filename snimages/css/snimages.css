@@ -1,0 +1,76 @@
+@charset "utf-8";
+/* snimages.css Nov 2023 par Simon N */
+
+/* SVG */
+svg .svg-current-color{ fill: currentColor; }
+
+/* SN Image */
+figure { display: inline-block; position: relative; margin: 0; margin-bottom: 0; vertical-align: bottom; }
+img{ margin: 0; margin-bottom: 0; vertical-align: bottom; }
+
+.sn-img-active img{ border: 1px solid rgba(199,199,199,0.2); cursor: pointer; }
+.sn-img-active:hover img{ border: 1px solid rgba(199,199,199,0.4); }
+
+.sn-img-active figcaption{
+	opacity:0; display: block; width: 92%; position: absolute; overflow: hidden; vertical-align: bottom; max-height: 100%; padding: 4px; font-size: .8rem;
+	background-color: #DDD; background-color: rgba(255,255,255,0.9); color: #333;
+	bottom: 0; left:50%; transform:translate(-50%,-50%); -ms-transform:translate(-50%,-50%); }
+.sn-img-active:hover figcaption{ opacity:.9; }
+.sn-img-active:focus figcaption{ opacity:.9; }
+
+.sans-legende .sn-img-active figcaption{ display: none; }
+
+.sn-img-active button.sn-img-z-btn{
+	font-size: .6rem; display: block; position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; opacity: .5;
+	background-color: rgba(222,222,222,.5); border-radius: 0 0 0 12px; border: 1px solid rgba(222,222,222,.6);  color: #f8f8f8; }
+.sn-img-active button.sn-img-z-btn svg{ display:inline-block; vertical-align: middle; }
+.sn-img-active:hover button.sn-img-z-btn{ opacity:.8; background-color: rgba(222,222,222,.5); }
+.sn-img-active:focus button.sn-img-z-btn{ opacity:.8; background-color: rgba(222,222,222,.5); }
+
+.sn-img-pos-sans{ float: none; clear: both; display: block; margin: 16px auto; }
+.sn-img-pos-droite{ float: right; margin: 16px; }
+.sn-img-pos-gauche{ float: left; margin: 16px; }
+
+/* SN Galerie */
+.sn-galerie{
+	animation:sn-opacity0-to10 3s;
+	display: flex; flex-wrap: wrap; }
+.sn-galerie-col{ flex: 100%; max-width: 100%; text-align: center; }
+.sn-galerie .sn-img{ display: block; position: relative; flex-basis:100%; width: 100%; padding: 4px; margin: 0 auto 0 auto; }
+.sn-galerie .sn-img:hover{ animation: sn-opacity6-to10 0.6s; }
+.sn-galerie:last-child .sn-galerie-col:last-child .sn-img{}
+
+#sn-img-zoom-screen{ opacity:0; display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; padding: 0 5%; background: rgba(0,0,0,0.95); z-index: 1112; }
+#sn-img-zoom-screen figure{ float: none; }
+#sn-img-zoom-screen img{ margin-top: 50vh; transform: translateY(-50%); -ms-transform:translateY(-50%); cursor: pointer; animation:snopacite 0.8s; }
+#sn-img-zoom-screen:hover img{ border: none; cursor: default; }
+
+#sn-img-zoom-screen-navi{ display: block; width: 100%; height: 6vh; position: fixed; top: 2vh; left: 0; color: #c8c8c8; z-index: 1113; }
+#sn-img-zoom-screen-navi-explication{ display: inline-block; position: relative; vertical-align: middle; width: 66%; padding: 8px 2%; margin: 0; font-size:.9em; }
+
+#sn-img-zoom-screen-prec-btn{ display: inline-block; position: relative; vertical-align: middle; margin-left: 2%; margin-right: 0; top: 45vh; width: 6vh; height: 6vh; background-color: rgba(255,255,255,0.2); color: #fff; border-radius: 32px 4px 4px 32px; box-shadow: 0 4px 8px rgba(241,241,241,0.3); border: 2px solid #f8f8f8; opacity: .8; }
+#sn-img-zoom-screen-suiv-btn{ display: inline-block; position: relative; vertical-align: middle; margin-right: 2%; margin-left: 0; top: 45vh; width: 6vh; height: 6vh; background-color: rgba(255,255,255,0.2); color: #fff; border-radius: 4px 32px 32px 4px; box-shadow: 0 4px 8px rgba(241,241,241,0.3); border: 2px solid #f8f8f8; opacity: .8; }
+#sn-img-zoom-screen-prec-btn::after{ height: 0; position: absolute; content: " "; bottom: 1.2vh; left: 1.8vh; width:0; border: medium solid #f8f8f8; border-width: 1.8vh 1.8vh 1.8vh 0; border-color: transparent #f8f8f8 transparent transparent; }
+#sn-img-zoom-screen-suiv-btn::after{ height: 0; position: absolute; content: " "; bottom: 1.2vh; right: 1.8vh; width:0; border: medium solid #f8f8f8; border-width: 1.8vh 0 1.8vh 1.8vh; border-color: transparent transparent transparent #f8f8f8; }
+
+#sn-img-zoom-screen-prec-btn:hover, #sn-img-zoom-screen-suiv-btn:hover{ opacity: 1; box-shadow: 0 4px 8px rgba(241,241,241,0.6); }
+#sn-img-zoom-screen-prec-btn:active, #sn-img-zoom-screen-suiv-btn:active{ background-color: rgba(255,255,255,0.9); box-shadow: none; }
+	#sn-img-zoom-screen-prec-btn:active::after{ border: medium solid #222222; border-width: 1.8vh 1.8vh 1.8vh 0; border-color: transparent #222222 transparent transparent; }
+	#sn-img-zoom-screen-suiv-btn:active::after{ border: medium solid #222222; border-width: 1.8vh 0 1.8vh 1.8vh; border-color: transparent transparent transparent #222222; }
+
+#sn-img-zoom-screen-legende{ display: block; width: 100%; position: fixed; bottom: 5vh; left: 0; padding: 0 5% 5vh 5%; color: #FFF; z-index: 1114; }
+#sn-img-zoom-screen-legende p{ margin: 0; text-align: left;}
+
+@keyframes sn-opacity0-to10{from{opacity:0} to{opacity:1}}
+@keyframes sn-opacity6-to10{from{opacity:.6} to{opacity:1}}
+@keyframes sn-opacity10-to6{from{opacity:1} to{opacity:.6}}
+
+@media (min-width: 768px) {
+.sn-galerie-col-2{ flex: 50%; max-width: 50%; }
+.sn-galerie-col-3{ flex: 33.33%; max-width: 33.33%; }
+.sn-galerie-col-4{ flex: 25%; max-width: 25%; }
+.sn-galerie-col-5{ flex: 20%; max-width: 20%; }
+.sn-galerie-col-6{ flex: 17.7%; max-width: 17.7%; }
+}
+
+/* snimages.css::fin */

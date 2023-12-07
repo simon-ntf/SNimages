@@ -1,0 +1,16 @@
+#SET{id_document,#ENV{id_document}|sinon{#ENV{id}}
+<BOUCLE_image (DOCUMENTS) {media=image} {id_document=#GET{id_document}} {inclus=image} {mode?} {tout}>
+<BOUCLE_snimages(SNIMAGES){statut in prop,publie}{id_document}{snv_format=img}{snv_def=hd}>
+[(#SET{img_hd,#URL_SITE_SPIP/IMG/snimages/img_hd/#ID_DOCUMENT.#EXTENSION})]
+</BOUCLE_snimages>
+[(#SET{image,[<img src='(#URL_DOCUMENT)'[ srcset="(#GET{img_hd}) 2x"][ width="(#LARGEUR)"][ height="(#HAUTEUR)"]/>]})]
+[(#SET{image,#GET{image}|inserer_attribut{alt,#ENV{alt,#ALT}|sinon{''}}})]
+[(#ENV{legender}|!={non}|oui)[(#SET{legende,#INCLURE{fond=modeles/snimg_legende, env}|trim})]]
+<figure class="[(#ID_DOCUMENT|snimg_modele_standard_classes{image}) ][(#ENV{classe}) ][(#ENV{active}|=={oui}|oui)sn-img-active ][sn-img-pos-(#ENV{pos}) ]spip_lien_ok">
+[<a href="(#ENV{lien})" class="sn-img-lien[ (#ENV{lien_class})]">]
+		#GET{image}
+[(#ENV{lien}|?{</a>})]
+#GET{legende}
+</figure>
+</BOUCLE_image>
+<//B_image>

@@ -1,0 +1,65 @@
+#SET{liste,#ARRAY}
+<B_rubs7>
+<BOUCLE_rubs7(rubriques){tout}{id_document}>
+	[(#SET{liste,#GET{liste}|push{#ARRAY{objet,rubrique,id_objet,#ID_RUBRIQUE,lien,#ID_RUBRIQUE|generer_objet_lien{rubrique}}}})]
+</BOUCLE_rubs7>
+[(#SET{nb_total,#GET{nb_total}|plus{#COMPTEUR_BOUCLE}})]
+</B_rubs7>
+
+<B_arts7>
+<BOUCLE_arts7(articles){id_document}>
+	[(#SET{liste,#GET{liste}|push{#ARRAY{objet,article,id_objet,#ID_ARTICLE,lien,#ID_ARTICLE|generer_objet_lien{article}}}})]
+</BOUCLE_arts7>
+[(#SET{nb_total,#GET{nb_total}|plus{#COMPTEUR_BOUCLE}})]
+</B_arts7>
+
+<B_auts7>
+<BOUCLE_auts7(auteurs){id_document}>
+	[(#SET{liste,#GET{liste}|push{#ARRAY{objet,auteur,id_objet,#ID_AUTEUR,lien,#ID_AUTEUR|generer_objet_lien{auteur}}}})]
+</BOUCLE_auts7>
+[(#SET{nb_total,#GET{nb_total}|plus{#COMPTEUR_BOUCLE}})]
+</B_auts7>
+
+<B_mots7>
+<BOUCLE_mots7(mots){id_document}>
+	[(#SET{liste,#GET{liste}|push{#ARRAY{objet,mot,id_objet,#ID_MOT,lien,#ID_MOT|generer_objet_lien{mot}}}})]
+</BOUCLE_mots7>
+[(#SET{nb_total,#GET{nb_total}|plus{#COMPTEUR_BOUCLE}})]
+</B_mots7>
+
+[(#PLUGIN{snpushs}|oui)
+<B_pushs7>
+<BOUCLE_pushs7(snpushs){id_document}>
+	[(#SET{liste,#GET{liste}|push{#ARRAY{objet,snpush,id_objet,#ID_SNPUSH,lien,#ID_SNPUSH|generer_objet_lien{snpush}}}})]
+</BOUCLE_pushs7>
+[(#SET{nb_total,#GET{nb_total}|plus{#COMPTEUR_BOUCLE}})]
+</B_pushs7>
+]
+
+<div class="box info"><div class="box__body clearfix"><div class="infos">
+<h3><:snimage:info_utilisation_titre:></h3>
+<ul><li><strong><:snimage:info_utilisation_sous_titre:></strong></li>
+<B_aff>
+<p>[(#TOTAL_BOUCLE|>{1}|?{<:snimage:info_utilisation_nb{nb=#TOTAL_BOUCLE}:>,<:snimage:info_utilisation_1:>})].</p>
+<ul class='liste_items'>
+<BOUCLE_aff(DATA){source array, #GET{liste}}>
+	<li class='item'>#VALEUR{lien}[ ((#VALEUR{objet}))]</li>
+</BOUCLE_aff>
+</ul>
+</B_aff>
+<p><:snimage:info_utilisation_0:>.</p>
+<//B_aff>
+<li><strong><:snimage:info_utilisation_liens_sous_titre:></strong></li>
+<B_liens>
+<p>[(#TOTAL_BOUCLE|>{1}|?{<:snimage:info_utilisation_liens_nb{nb=#TOTAL_BOUCLE}:>,<:snimage:info_utilisation_liens_1:>})].</p>
+<ul class='liste_items'>
+<BOUCLE_liens(documents_liens){id_document}{snlien=snimg}>
+	<li class='item'>[(#ID_OBJET|generer_objet_lien{#OBJET})] (#OBJET)</li>
+</BOUCLE_liens>
+</ul>
+</B_liens>
+<p><:snimage:info_utilisation_liens_0:>.</p>
+<//B_liens>
+</li></ul>
+</div></div></div>
+<!-- SN Images - prive/squelettes/inclure/colonne-snimage -->

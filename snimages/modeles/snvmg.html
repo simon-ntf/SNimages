@@ -1,0 +1,20 @@
+<BOUCLE_image (DOCUMENTS) {media=image} {id_document=#ENV{id_document}|sinon{#ENV{id}}} {inclus=image} {mode?} {tout}>
+<BOUCLE_snimage_bd(SNIMAGES){statut in prop,publie}{id_document}{snv_format=#ENV{format}|sinon{car}}{snv_def=bd}>
+[(#SET{largeur,#LARGEUR})]
+[(#SET{hauteur,#HAUTEUR})]
+[(#SET{img_bd,#URL_SITE_SPIP/IMG/snimages/[(#ENV{format}|sinon{car})]_bd/#ID_DOCUMENT.#EXTENSION})]
+</BOUCLE_snimage_bd>
+<BOUCLE_snimage_hd(SNIMAGES){statut in prop,publie}{id_document}{snv_format=#ENV{format}|sinon{car}}{snv_def=hd}>
+[(#SET{img_hd,#URL_SITE_SPIP/IMG/snimages/[(#ENV{format}|sinon{car})]_hd/#ID_DOCUMENT.#EXTENSION})]
+</BOUCLE_snimage_hd>
+[(#SET{image,[<img src='(#GET{img_bd})'[ srcset="(#GET{img_hd}) 2x"][ width="(#GET{largeur})"][ height="(#GET{hauteur})"]/>]})]
+[(#SET{image,#GET{image}|inserer_attribut{alt,#ENV{alt,#ALT}|sinon{''}}})]
+[(#ENV{legender}|=={oui}|oui)[(#SET{legende,#INCLURE{fond=modeles/snimg_legende, env}|trim})]]
+<figure class="[(#ID_DOCUMENT|snimg_modele_standard_classes{image}) ][(#ENV{classe}) ][(#ENV{active}|oui)sn-img-active ][sn-img-pos-(#ENV{pos}) ][sn-img-(#ENV{format}|sinon{car}) ]spip_lien_ok">
+[<a href="(#ENV{lien})" class="sn-img-lien[ (#ENV{lien_class})]">]
+		#GET{image}
+[(#ENV{lien}|?{</a>})]
+[(#ENV{legender}|=={oui}|oui)#GET{legende}]
+</figure>
+</BOUCLE_image>
+<//B_image>

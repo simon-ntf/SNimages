@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+/***************************************************************************
+ *  SN Suite, suite de plugins pour SPIP                                   *
+ *  Copyright © depuis 2014                                                *
+ *  Simon Nataf                                                            *
+****************************************************************************
+ * SPIP SN Images prive / style.css                                        *
+/***************************************************************************/
+
+
+/* --------------------------------------------------------------
+
+  
+
+-------------------------------------------------------------- */
+.snimages-prive-explication{ font-size: .9em; color: #999; line-height: 1.1em; }
+.snimage-prive-apercu{ max-width: 360px; }
+.snimage-prive-mediatheque-galerie-apercu{ max-width: 100px; }
+
+/* --------------------------------------------------------------
+
+  Controle de formulaire selecteur d'image
+
+-------------------------------------------------------------- */
+.saisie_selecteur_snimage text, .saisie_selecteur_snimage input.text{ width: auto; }
+.saisie_selecteur_snimage .selecteur_snimage_parcourir{ min-height: 24px; padding: 5px; cursor: pointer; }
+.snimages_selecteur_api{ background-color: #CCC; background: rgba(212,212,212,0.9); padding: 5px; border: 1px solid #CCC; z-index: 99; }
+.snimages_selecteur_api .snimage_selecteur_api_legende{ display: block; margin:0 auto 1em auto; font-weight: normal; font-size: 1.5em; text-align: center; color: #AAA; }
+.snimages_selecteur_images li{ cursor: pointer; width: 96px; height: auto; display: inline-block; vertical-align: middle; margin: 4px; text-align: center; overflow: hidden; }
+.snimages_selecteur_images ul li:hover{ cursor: pointer; background-color: #333; background: rgba(0,0,0,0.4); }
+.snimages_selecteur_images ul li img{ margin: 4px; max-width: 88px; vertical-align: middle; }
+.snimages_selecteur_api .pagination{ color: #FFF; background: none; border: none; }
+.snimages_selecteur_api .pagination > ul > li{ display: inline-block; }
+.snimages_selecteur_api .pagination a{ color: #DDD; }
+.snimages_selecteur_api .selecteur_snimages_info_snimage{ color: #AAA; }
+.snimages_selecteur_api .snimage_selecteur_api_quitter{ color: #AAA; font-size: 2em; display: block; position: absolute; top: 8px; right: 8px; cursor: pointer; }
+.snimages_selecteur_api .snimage_selecteur_api_quitter:hover, .snimages_selecteur_api .snimage_selecteur_api_quitter:active{ color: #000; text-decoration: none; }
+.snimage_apercu img{ max-width: 256px; }
+.snimage_apercu p{ color: #AAA; }
+.imgapi_afficher{ display: block; }
+.imgapi_masquer{ display: none; }
+
+/* --------------------------------------------------------------
+
+  end
+
+-------------------------------------------------------------- */

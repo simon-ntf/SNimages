@@ -1,0 +1,16 @@
+[(#AUTORISER{configurer,_snimagesconfig}|sinon_interdire_acces)]
+<div class='formulaire_spip'>
+    <form method='post' action='#ENV{action}' id='formulaire_recup_snimages'><div>
+    [(#ACTION_FORMULAIRE{#ENV{action}})]
+    <fieldset>
+    [<legend>(#LANG|snimages_detecter_sauvegarde|?{<:snimage:config_snimages_recup_texte:>,<:snimage:config_snimages_recup_texte_sinon:>})</legend>]
+    [<p class="explication">(#LANG|snimages_detecter_sauvegarde|oui)<:snimage:config_snimages_recup_explication:>.</p>]
+    [<p class="sn_reponse_formulaire sn_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="sn_reponse_formulaire sn_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	</fieldset>
+	[(#LANG|snimages_detecter_sauvegarde|oui)<fieldset>
+		<p class="boutons"><input type='submit' class='submit' value='<:snimage:config_snimages_recup_bouton:>' /></p>
+	</fieldset>]
+	</div></form>
+</div>
+<!-- SN Images - formulaires/recup_snimages -->

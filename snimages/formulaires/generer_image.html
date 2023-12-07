@@ -1,0 +1,24 @@
+[(#SESSION{id_auteur}|oui|sinon_interdire_acces)]
+<div class='formulaire_spip'>
+	 [(#ENV{affichage}|=={oui}|?{
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_image','non'})" >-</a> ],
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_image','oui'})" >+</a> ]
+	 })]
+    <h3 class="titrem"><img class="cadre-icone" width="24" height="24" alt="" src="#CHEMIN_IMAGE{icone-snimages-24.svg}"><:snimage:generer_image_titre:></h3>
+    [<p class="sn_reponse_formulaire sn_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="sn_reponse_formulaire sn_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form method='post' action='#ENV{action}' id='formulaire_generer_image'[ (#ENV{affichage}|=={oui}|non)class="sn-prive-cacher"]><div>
+    [(#ACTION_FORMULAIRE{#ENV{action}})]
+    <div>
+        	<fieldset>
+			[(#SAISIE{'input', gi_id_document, label=<:snimage:snimage_label_doc_ref:>, defaut=#ENV**{erreurs}|table_valeur{gi_id_document}})]
+        	[(#SAISIE{'selection', sn_image_format, label=<:snimage:snimage_format:>, defaut=#ENV**{sn_image_format}, datas=#ENV**{sn_image_liste_formats}, cacher_option_intro=oui})]
+        	[(#SAISIE{'selection', sn_image_habillage, label=<:snimage:generer_image_habillage:>, defaut=#ENV**{sn_image_habillage}, datas=#ENV**{sn_image_liste_habillages}, cacher_option_intro=oui})]
+        	[(#SAISIE{'oui_non', sn_image_active, label=<:snimage:generer_image_active:>, defaut=#ENV**{sn_image_active}})]
+        	[(#SAISIE{'oui_non', sn_image_legender, label=<:snimage:generer_image_legender:>, defaut=#ENV**{sn_image_legender}})]
+        	</fieldset>
+    </div>
+    <p class="boutons"><input type='submit' class='submit' value='<:snimage:generer_image_valider:>' /></p>
+    </div></form>
+</div>
+<!-- SN Images - formulaires/generer_image -->

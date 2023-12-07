@@ -1,0 +1,38 @@
+[(#SET{liste_images_ok,#ENV{liste_images}|snimage_galerie_liste_tranche{#ENV{limite}|sinon{0}|intval}})]
+[(#SET{nombre_grilles,#GET{liste_images_ok}|count})]
+[(#SET{domid,#ENV{domid}|sinon{#LANG|sn_hasardiser}})]
+[(#SET{nb_colonnes,#ENV{nb_colonnes}|sinon{3}})]
+[(#REM)
+	Parametres :
+	- liste_images Liste des ID des images
+	- nb_colonnes Nombre de colonnes
+	- limite Nombre maximum par plage de pagination ou 0 pour desactiver la pagination
+	- domid Base d'identifiant DOM des blocs Galerie
+	- classes Classes CSS des blocs Galerie
+	- img_classe Classes CSS des images contenues
+]
+<B_galeries>
+<div class="sn-galerie-conteneur">
+<p class="sn-si sn-tab sn-ecr sn-texte-contexte"><:snimage:info_sngalerie_explication:></p>
+[(#GET{nombre_grilles}|>{1}|oui)#ANCRE_PAGINATION]
+<BOUCLE_galeries(DATA) {source array, #GET{liste_images_ok}} {pagination 1}>
+<div id="#GET{domid}-#COMPTEUR_BOUCLE" class="sn-galerie sn-galerie-modelee[ (#ENV{classe})]">
+<BOUCLE_galerie_visible(DATA) {source array, #GET{liste_images_ok/#COMPTEUR_BOUCLE}}>
+[(#MODELE{snimg,id_document=#VALEUR,classe=[(#ENV{img_classe}|sinon{''})]})]
+</BOUCLE_galerie_visible>
+</div>
+[(#GET{nombre_grilles}|>{1}|oui)[<nav role="navigation" class="p pagination">(#PAGINATION)</nav>]]
+</div>
+</BOUCLE_galeries>
+<script type="text/javascript">
+	var domid = "#GET{domid}";
+	var nombre_grilles = parseInt("#GET{nombre_grilles}");
+	var nombre_colonnes = parseInt("[(#ENV{nb_colonnes}|sinon{3})]");
+	if (window.jQuery){	jQuery(document).ready(function(){
+		for(var i=1; i<=nombre_grilles; i++){
+			if($('#' + domid + '-' + i).is('div') === true){
+				snGalerieCreerColonnes($('#' + domid + '-' + i),nombre_colonnes);
+			}
+		}
+	;}); }
+</script>

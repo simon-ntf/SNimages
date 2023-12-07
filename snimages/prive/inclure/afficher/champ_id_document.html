@@ -1,0 +1,7 @@
+<div class="champ contenu_id_document">
+<div class="label"><:snimage:snimage_titre_doc_ref:></div>
+<BOUCLE_snimages(SNIMAGES){statut in prop,publie}{id_document}{snv_format=car}{snv_def=bd}>
+<img src="#URL_SITE_SPIP/IMG/snimages/#SNV_FORMAT*_#SNV_DEF/#ID_DOCUMENT.#EXTENSION" alt="<:snimage:erreur_fichier_manquant:>"/>
+</BOUCLE_snimages>
+</div>
+<!-- SN Images - prive/inclure/afficher/champ_id_document -->

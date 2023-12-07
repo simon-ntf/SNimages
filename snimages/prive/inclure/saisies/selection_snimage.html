@@ -1,0 +1,14 @@
+[(#SET{max_pagination,#ENV{max_pagination}|sinon{16}})]
+<B_snimages>
+#ANCRE_PAGINATION
+[(#SET{url,''})]
+<ul class="snimages_selecteur_images ajax"><BOUCLE_snimages(SNIMAGES){statut in prop,publie}{snv_format=car}{snv_def=bd}{par id_document}{inverse}{pagination #GET{max_pagination}}>
+	<li class="sel_snimage" name="#ID_DOCUMENT" data-infos="<:snimage:snimage_label_numero:>#ID_DOCUMENT" <BOUCLE_docs(DOCUMENTS){tout}{id_document}{0,1}>data-source="#FICHIER"</BOUCLE_docs> data-extension="#EXTENSION">
+		<a href="[(#SELF|parametre_url{imgapi,non}|parametre_url{selimg,#ID_DOCUMENT})]"><img src="#URL_SITE_SPIP/IMG/snimages/#SNV_FORMAT*_#SNV_DEF/#ID_DOCUMENT.#EXTENSION" alt="<:snimage:erreur_fichier_manquant:>"/>
+	</li></BOUCLE_snimages></ul>
+<p id="selecteur_snimages_info_snimage_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]" class="selecteur_snimages_info_snimage"></p>
+[<div class='pagination ajax'>(#PAGINATION{prive})</div>]
+</B_snimages>
+<p class="snimage_apercu_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)] ajax"><:snimage:info_aucune_snimage:></p>
+<//B_snimages>
+<!-- SN Images - prive/inclure/saisies/selection_snimage -->

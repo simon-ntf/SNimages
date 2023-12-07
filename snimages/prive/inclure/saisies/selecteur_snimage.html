@@ -1,0 +1,36 @@
+[(#SET{id_sel_img,#ENV{selimg}|sinon{#ENV{defaut}}})]
+<input type="text" name="#ENV{nom}" class="text[ (#ENV{class})]" id="#ENV{nom}"[ value="(#ENV{selimg}|sinon{defaut})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|oui) required="required"] />
+<B_images>
+<div class="snimage_apercu">
+	<p id="snimage_apercu_#ENV{nom}">
+		<BOUCLE_images(DOCUMENTS){statut in prop,publie}{id_document=#GET{id_sel_img}}>
+      	<img src="#FICHIER" alt="<:snimage:erreur_fichier_manquant:>" />
+		</BOUCLE_images>
+    </p>
+</div>
+</B_images>
+#SET{param_api,oui}
+[(#ENV{imgapi}|=={oui}|oui)#SET{param_api,non}]
+<a href="[(#SELF|parametre_url{imgapi,#GET{param_api}})]" class="btn ajax" name="parcourir"><:snimage:snimage_select_parcourir:></a>
+[(#ENV{imgapi}|=={oui}|oui)
+	<div id="snimages_selecteur_api_#ENV{nom}" class="snimages_selecteur_api ajax[ (#ENV{imgapi}|=={oui}|?{imgapi_afficher,imgapi_masquer})]">
+	<strong class="snimage_selecteur_api_legende"><:snimage:snimage_select_titre:></strong>
+    <a id="snimages_selecteur_quitter_#ENV{nom}" class="snimage_selecteur_api_quitter ajax" href="[(#SELF|parametre_url{imgapi,non})]" >X</a>
+    #INCLURE{fond=prive/inclure/saisies/selection_snimage,env,ajax}
+</div>]
+[(#REM)
+  Parametres supplementaire :
+  - defaut : valeur par defaut du parametre
+  - class : classe(s) css ajoutes a l'input
+  - size : taille du champ
+  - maxlength : nombre de caracteres maximum
+  - disable : champ insaisissable ? 'oui' (defaut : '')
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - max_pagination : nombre d'images max par page paginée (par défaut 16/page)
+]
+<script type="text/javascript">
+	if (window.jQuery){	jQuery(document).ready(function(){
+		snimageSelecteur('#ENV{nom}','<:snimage:snimage_select_alt:>');
+	});}
+</script>
+<!-- SN Images - prive/inclure/saisies/selecteur_snimage -->

@@ -1,0 +1,24 @@
+[(#SESSION{id_auteur}|oui|sinon_interdire_acces)]
+<div class='formulaire_spip'>
+	[(#ENV{affichage}|=={oui}|?{
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_galerie','non'})" >-</a> ],
+	 	[<a class="sn-prive-btn sn-prive-btn-plus ajax" href="(#SELF|parametre_url{'sn_affichage_generer_galerie','oui'})" >+</a> ]
+	 	,
+	 })]
+    <h3 class="titrem"><img class="cadre-icone" width="24" height="24" alt="" src="#CHEMIN_IMAGE{icone-sn-galerie-24.svg}"><:snimage:generer_galerie_titre:></h3>
+    [<p class="sn_reponse_formulaire sn_formulaire_ok">(#ENV**{message_ok})</p>]
+    [<p class="sn_reponse_formulaire sn_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form method='post' action='#ENV{action}' id='formulaire_generer_galerie'[ (#ENV{affichage}|=={oui}|non)class="sn-prive-cacher"]><div>
+    [(#ACTION_FORMULAIRE{#ENV{action}})]
+    <div>
+        <fieldset>
+        [(#SAISIE{'input', liste_images, label=<:snimage:generer_galerie_liste_images:>, defaut=#ENV{liste_images}, maxlength=1024, obligatoire=oui})]
+        [(#SAISIE{'selection', nb_colonnes, label=<:snimage:generer_galerie_nb_colonnes:>, defaut=#ENV{nb_colonnes}, data=#ENV{liste_nb_colonnes}})]
+        [(#SAISIE{'input', limite, label=<:snimage:generer_galerie_limite:>, defaut=#ENV**{limite}, maxlength=4})]
+        [(#SAISIE{'input', bloc_classe, label=<:snedition:generer_bloc_classe:>, defaut=#ENV**{bloc_classe}, maxlength=256})]
+        </fieldset>
+    </div>
+    <p class="boutons"><input type='submit' class='submit' value='<:snimage:generer_galerie_valider:>' /></p>
+    </div></form>
+</div>
+<!-- SN Images - formulaires/generer_galerie -->

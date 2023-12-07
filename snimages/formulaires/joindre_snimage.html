@@ -1,0 +1,23 @@
+[(#SET{limites,#ENV{snimage_format}|snimage_format_attribut{#ENV{snimage_def}}})]
+<div class='formulaire_spip formulaire_joindre formulaire_joindre_snvignette' id='formulaire_joindre_snvignette-#ENV{id,new}-#ENV{snimage_format}-#ENV{snimage_def}'>
+	<h3 class='titrem'>[(#CHEMIN_IMAGE{snimage-24.png}|balise_img{'',cadre-icone})][(#ENV{id_snimage,new}|intval|?{<:snimage:vignette_titre_remplacer:>,<:snimage:vignette_titre_ajouter:>})][ (#ENV{snimage_format}|snimage_format_libelle)][ (#ENV{snimage_def}|snimage_def_libelle)]</h3>
+	[(#GET{limites/necessaire}|=={oui}|oui)<p class="sn-prive-txt-mini"><strong><:snimage:vignette_info_necessaire:></strong></p>]
+	[(#ENV{remplacement}|oui)<p class="snimage-prive-apercu"><img src="#URL_SITE_SPIP/IMG/snimages/#ENV{snimage_format}_#ENV{snimage_def}/#ENV{id_document}.#ENV{extension}" alt="<:snimage:erreur_fichier_manquant:>"/></p>]
+    <span class="image_loading"></span>
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</div>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	<form action="#ENV{action}#formulaire_joindre_snvignette-#ENV{id,new}-#ENV{snimage_format}" method="post" enctype='multipart/form-data'><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+        <div class="editer pleine_largeur editer_explication explication_joindre_snvignette">
+			<div class="explication">
+				<p>[(#ENV{snimage_format}|snimage_format_attribut{necessaire}|=={oui}|oui)<strong><:snimage:vignette_legende_joindre_necessaire:></strong><br />]<:snimage:vignette_legende_joindre{hauteur_min=#GET{limites/hauteur_min},hauteur_max=#GET{limites/hauteur_max},largeur_min=#GET{limites/largeur_min},largeur_max=#GET{limites/largeur_max},poids_max=#GET{limites/poids_max}}:></p>
+			</div>
+		</div>
+		[(#INCLURE{fond=formulaires/inc-upload_snimage, env, mediatheque=#ENV{objet,''}|et{#ENV{id_objet,''}}|et{#ENV{proposer_media}}})]
+	</div></form>
+
+</div>
+[(#ENV{_galerie,''}|oui)
+		[(#INCLURE{fond=#ENV{_galerie}, env, ajax})]
+]
+<!-- SN Images - formulaires/joindre_snimage -->
